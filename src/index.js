@@ -139,13 +139,13 @@ export default class ImageMeasurer extends PureComponent {
 
                         const src = image(item);
 
-                        if (!src) return null;
+                        if (!src || (Boolean(props.isBase64) && sizes[src])) return null;
 
                         return (
                             <img
                                 key={keyMapper(item, index) || index}
                                 src={src}
-                                alt={src}
+                                alt={Boolean(props.isBase64) ? "": src}
                                 onLoad={event => this.onLoad(src, event.target)}
                                 onError={event => this.onLoadError(event, item, src)}
                             />
